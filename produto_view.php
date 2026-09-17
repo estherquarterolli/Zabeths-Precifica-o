@@ -10,7 +10,6 @@ $erro = null;
 $p = null;
 
 try {
-    gs_bootstrap();
     if (!$linha) {
         throw new SheetsException('Registro não informado.');
     }

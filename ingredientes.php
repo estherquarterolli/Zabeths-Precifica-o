@@ -9,7 +9,6 @@ $erro = null;
 $ingredientes = [];
 
 try {
-    gs_bootstrap();
     $ingredientes = repo_ler_ingredientes();
 } catch (SheetsException $e) {
     $erro = $e->getMessage();

@@ -10,7 +10,6 @@ $historico = [];
 $totalIngredientes = 0;
 
 try {
-    gs_bootstrap();
     $historico = repo_ler_produtos();
     $totalIngredientes = count(repo_ler_ingredientes());
 } catch (SheetsException $e) {

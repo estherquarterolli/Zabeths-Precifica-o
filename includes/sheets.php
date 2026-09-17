@@ -225,6 +225,7 @@ function gs_bootstrap(): void
     }
 
     if (empty($toCreate)) {
+        @touch($marker);
         return;
     }
 
@@ -235,4 +236,6 @@ function gs_bootstrap(): void
             gs_values_update($name . '!A1', $headers);
         }
     }
+
+    @touch($marker);
 }

@@ -9,7 +9,6 @@ $erro = null;
 $historico = [];
 
 try {
-    gs_bootstrap();
     $historico = repo_ler_produtos();
 } catch (SheetsException $e) {
     $erro = $e->getMessage();
