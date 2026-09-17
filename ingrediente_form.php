@@ -15,8 +15,6 @@ $ingrediente = [
 ];
 
 try {
-    gs_bootstrap();
-
     if ($linha) {
         $existente = repo_buscar_ingrediente($linha);
         if ($existente) {
@@ -37,6 +35,7 @@ try {
         } elseif ($dados['quantidade_pacote'] <= 0) {
             $erro = 'A quantidade da embalagem deve ser maior que zero.';
         } else {
+            gs_bootstrap();
             repo_salvar_ingrediente($linha, $dados);
             header('Location: ingredientes.php');
             exit;
