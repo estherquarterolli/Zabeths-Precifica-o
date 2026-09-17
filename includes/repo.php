@@ -154,7 +154,7 @@ function repo_salvar_produto(array $produto, array $itens, array $calculo): int
     ));
 
     return gs_values_append('Produtos!A:R', [
-        date('d/m/Y H:i'),
+        "'" . date('d/m/Y H:i'),
         $produto['nome'],
         $produto['categoria'] ?? '',
         $produto['rendimento_qtd'],

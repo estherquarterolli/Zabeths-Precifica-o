@@ -23,7 +23,6 @@ $todosIngredientes = [];
 $config = CONFIG_PADRAO;
 
 try {
-    gs_bootstrap();
     $todosIngredientes = repo_ler_ingredientes();
     $config = repo_ler_config();
 
@@ -68,6 +67,7 @@ try {
             $erro = 'Adicione pelo menos um ingrediente com quantidade.';
         } else {
             $calculo = calcular_precificacao($dados, $itens, $config);
+            gs_bootstrap();
             $linhaSalva = repo_salvar_produto($dados, $itens, $calculo);
             $sucesso = 'Precificação salva na planilha com sucesso!';
         }

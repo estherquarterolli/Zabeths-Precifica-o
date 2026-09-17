@@ -10,7 +10,6 @@ $sucesso = null;
 $config = CONFIG_PADRAO;
 
 try {
-    gs_bootstrap();
     $config = repo_ler_config();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,6 +21,7 @@ try {
             'percentual_imposto' => input_float($_POST['percentual_imposto'] ?? null),
             'margem_lucro_padrao' => input_float($_POST['margem_lucro_padrao'] ?? null),
         ];
+        gs_bootstrap();
         repo_salvar_config($config);
         $sucesso = 'Configurações salvas na planilha com sucesso!';
     }

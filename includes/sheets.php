@@ -129,7 +129,7 @@ function gs_request(string $method, string $path, ?array $body = null)
 function gs_values_get(string $range): array
 {
     try {
-        $result = gs_request('GET', '/values/' . rawurlencode($range));
+        $result = gs_request('GET', '/values/' . rawurlencode($range) . '?valueRenderOption=UNFORMATTED_VALUE');
     } catch (SheetsException $e) {
         if (str_contains($e->getMessage(), 'Unable to parse range')) {
             return [];
