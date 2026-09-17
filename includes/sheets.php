@@ -200,6 +200,11 @@ function gs_bootstrap(): void
     }
     $done = true;
 
+    $marker = sys_get_temp_dir() . '/zabeths_sheets_bootstrap_' . md5(gs_spreadsheet_id());
+    if (file_exists($marker) && (time() - filemtime($marker) < 3600)) {
+        return;
+    }
+
     $needed = [
         'Configuracoes' => ['SalarioHora', 'CustosFixosMensais', 'ProducaoMensalHoras', 'TaxaCartao', 'Imposto', 'MargemPadrao'],
         'Ingredientes' => ['Nome', 'Unidade', 'PrecoEmbalagem', 'QuantidadeEmbalagem', 'CustoUnitario'],
