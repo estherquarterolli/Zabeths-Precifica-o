@@ -97,19 +97,22 @@ require __DIR__ . '/includes/layout_top.php';
 </div>
 
 <?php if ($erro): ?>
-    <div class="alert error"><?= h($erro) ?></div>
+    <div class="alert error"><?= icon('warning') ?><span><?= h($erro) ?></span></div>
 <?php endif; ?>
 
 <?php if ($sucesso): ?>
     <div class="alert success">
-        <?= h($sucesso) ?>
-        <?php if ($linhaSalva): ?> <a href="produto_view.php?linha=<?= (int) $linhaSalva ?>">Ver detalhes salvos →</a><?php endif; ?>
-        · <a href="produtos.php">Ver histórico</a>
+        <?= icon('check-circle') ?>
+        <span>
+            <?= h($sucesso) ?>
+            <?php if ($linhaSalva): ?> <a href="produto_view.php?linha=<?= (int) $linhaSalva ?>">Ver detalhes salvos →</a><?php endif; ?>
+            · <a href="produtos.php">Ver histórico</a>
+        </span>
     </div>
 <?php endif; ?>
 
 <?php if (empty($todosIngredientes)): ?>
-    <div class="alert warning">Cadastre pelo menos um ingrediente antes de precificar um produto. <a href="ingrediente_form.php">Cadastrar ingrediente</a></div>
+    <div class="alert warning"><?= icon('warning') ?><span>Cadastre pelo menos um ingrediente antes de precificar um produto. <a href="ingrediente_form.php">Cadastrar ingrediente</a></span></div>
 <?php endif; ?>
 
 <form method="post" id="produto-form">
@@ -156,12 +159,12 @@ require __DIR__ . '/includes/layout_top.php';
             <div class="card">
                 <h3>Ingredientes da receita</h3>
                 <div id="ingredientes-lista"></div>
-                <button type="button" class="btn secondary small" id="btn-add-ingrediente">+ Adicionar ingrediente</button>
+                <button type="button" class="btn secondary small" id="btn-add-ingrediente"><?= icon('plus', 15) ?> Adicionar ingrediente</button>
             </div>
         </div>
 
         <div>
-            <div class="card" id="resumo-card" style="position:sticky; top:20px">
+            <div class="card sticky-summary" id="resumo-card">
                 <h3>Resumo do cálculo</h3>
                 <div class="breakdown-line"><span>Ingredientes</span><span id="r-ingredientes">R$ 0,00</span></div>
                 <div class="breakdown-line"><span>Mão de obra</span><span id="r-mao-obra">R$ 0,00</span></div>
@@ -174,9 +177,9 @@ require __DIR__ . '/includes/layout_top.php';
                     <div class="value" id="r-preco-unitario">R$ 0,00</div>
                     <div class="sub" id="r-preco-lote">Lote: R$ 0,00</div>
                 </div>
-                <div id="r-alerta" class="alert warning" style="display:none; margin-top:14px"></div>
+                <div id="r-alerta" class="alert warning" style="display:none; margin-top:14px"><?= icon('warning') ?><span id="r-alerta-texto"></span></div>
 
-                <button class="btn" type="submit" style="width:100%; justify-content:center; margin-top:18px">💾 Salvar na planilha</button>
+                <button class="btn" type="submit" style="width:100%; justify-content:center; margin-top:18px"><?= icon('save', 18) ?> Salvar na planilha</button>
             </div>
         </div>
     </div>
@@ -194,7 +197,7 @@ require __DIR__ . '/includes/layout_top.php';
         </select>
         <input type="number" step="0.001" min="0" name="quantidade[]" class="input-quantidade" placeholder="Qtd." required>
         <div class="linha-custo" style="font-size:0.85rem; color:var(--ink-soft); text-align:right">R$ 0,00</div>
-        <button type="button" class="remove-row" title="Remover">✕</button>
+        <button type="button" class="remove-row" title="Remover"><?= icon('x', 16) ?></button>
     </div>
 </template>
 

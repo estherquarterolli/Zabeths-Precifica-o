@@ -61,7 +61,7 @@ require __DIR__ . '/includes/layout_top.php';
 </div>
 
 <?php if ($erro): ?>
-    <div class="alert error"><?= h($erro) ?></div>
+    <div class="alert error"><?= icon('warning') ?><span><?= h($erro) ?></span></div>
 <?php endif; ?>
 
 <div class="card" style="max-width:560px">

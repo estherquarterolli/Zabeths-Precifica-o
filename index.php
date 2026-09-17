@@ -30,15 +30,15 @@ require __DIR__ . '/includes/layout_top.php';
 
 <div class="topbar">
     <div>
-        <h1>Olá! 👋</h1>
+        <h1><?= icon('sparkle', 26) ?> Olá!</h1>
         <p>Aqui está um resumo da precificação da Zabeths.</p>
     </div>
-    <a class="btn" href="produto_form.php">+ Nova precificação</a>
+    <a class="btn" href="produto_form.php"><?= icon('plus', 16) ?> Nova precificação</a>
 </div>
 
 <?php if ($erro): ?>
-    <div class="alert error">Não foi possível carregar os dados da planilha: <?= h($erro) ?><br>
-    Verifique <code>GOOGLE_SHEETS_ID</code> e <code>GOOGLE_SERVICE_ACCOUNT_B64</code>, e se a planilha foi compartilhada com o e-mail da conta de serviço (veja o README).</div>
+    <div class="alert error"><?= icon('warning') ?><span>Não foi possível carregar os dados da planilha: <?= h($erro) ?><br>
+    Verifique <code>GOOGLE_SHEETS_ID</code> e <code>GOOGLE_SERVICE_ACCOUNT_B64</code>, e se a planilha foi compartilhada com o e-mail da conta de serviço (veja o README).</span></div>
 <?php else: ?>
 
 <div class="grid cols-4">
@@ -64,11 +64,12 @@ require __DIR__ . '/includes/layout_top.php';
     <h2>Últimas precificações salvas</h2>
     <?php if ($totalProdutos === 0): ?>
         <div class="empty-state">
-            <div class="icon">🧁</div>
+            <?= icon('cupcake', 48) ?>
             <p>Você ainda não salvou nenhuma precificação na planilha.</p>
             <a class="btn" href="produto_form.php">Fazer a primeira precificação</a>
         </div>
     <?php else: ?>
+    <div class="table-scroll">
     <table>
         <thead>
             <tr>
@@ -88,11 +89,12 @@ require __DIR__ . '/includes/layout_top.php';
                 <td><?= num($p['rendimento_qtd'], 0) ?> <?= h($p['rendimento_unidade']) ?></td>
                 <td><?= money($p['custo_total']) ?></td>
                 <td><strong><?= money($p['preco_unitario']) ?></strong></td>
-                <td><a class="btn small secondary" href="produto_view.php?linha=<?= (int) $p['linha'] ?>">Ver</a></td>
+                <td><a class="btn small secondary" href="produto_view.php?linha=<?= (int) $p['linha'] ?>"><?= icon('eye', 15) ?> Ver</a></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
     <p class="hint"><a href="produtos.php">Ver histórico completo →</a></p>
     <?php endif; ?>
 </div>

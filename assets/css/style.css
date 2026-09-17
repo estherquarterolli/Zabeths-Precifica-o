@@ -135,8 +135,10 @@ a:hover { text-decoration: underline; }
     gap: 12px;
 }
 
-.topbar h1 { margin: 0; font-size: 1.6rem; }
+.topbar h1 { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 1.6rem; }
+.topbar h1 .icon { color: var(--pink-400); }
 .topbar p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.92rem; }
+.topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .btn {
     display: inline-flex;
@@ -172,6 +174,8 @@ a:hover { text-decoration: underline; }
 
 .card h2, .card h3 { margin-top: 0; }
 
+.sticky-summary { position: sticky; top: 20px; }
+
 .grid {
     display: grid;
     gap: 18px;
@@ -183,13 +187,69 @@ a:hover { text-decoration: underline; }
 @media (max-width: 900px) {
     .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
     .app-shell { flex-direction: column; }
-    .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; overflow-x: auto; }
-    .sidebar .brand { display: none; }
-    .sidebar-footer { display: none; }
-    .main { padding: 20px 16px 48px; }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px 12px;
+        gap: 2px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    .sidebar .brand {
+        flex-direction: row;
+        margin: 0 6px 0 0;
+        flex-shrink: 0;
+    }
+    .brand-logo-wrap { padding: 2px; margin-bottom: 0; }
+    .brand-logo { width: 34px; height: 34px; }
+    .brand-sub { display: none; }
+
+    .nav-link {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 9px 12px;
+        font-size: 0.84rem;
+    }
+
+    .sidebar-footer {
+        margin-top: 0;
+        margin-left: auto;
+        padding: 0 0 0 6px;
+        flex-shrink: 0;
+    }
+
+    .main { padding: 18px 16px 44px; }
+
     .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; }
+
+    .topbar { flex-direction: column; align-items: stretch; }
+    .topbar .btn { justify-content: center; }
+
+    .row-inline { flex-direction: column; gap: 0; }
+
+    .card { padding: 18px; }
+
+    .sticky-summary { position: static; }
+
+    .actions-cell { flex-wrap: wrap; }
+
+    .price-highlight .value { font-size: 1.8rem; }
+}
+
+@media (max-width: 480px) {
+    .login-card { padding: 28px 22px; }
 }
 
 .stat {
@@ -232,7 +292,8 @@ textarea { resize: vertical; min-height: 80px; }
 .row-inline { display: flex; gap: 12px; }
 .row-inline > * { flex: 1; }
 
-table { width: 100%; border-collapse: collapse; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+table { width: 100%; min-width: 560px; border-collapse: collapse; }
 th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
 th { color: var(--ink-soft); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
 tr:last-child td { border-bottom: none; }
@@ -280,6 +341,10 @@ tr:hover td { background: var(--pink-50); }
 @media (max-width: 700px) {
     .ingredient-row { grid-template-columns: 1fr 1fr; }
 }
+@media (max-width: 480px) {
+    .ingredient-row { grid-template-columns: 1fr; }
+    .ingredient-row .remove-row { justify-self: end; }
+}
 
 .remove-row {
     background: var(--pink-100);
@@ -322,6 +387,7 @@ tr:hover td { background: var(--pink-50); }
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
     background: radial-gradient(circle at top, var(--pink-100), var(--bg));
 }
 .login-card {
@@ -333,7 +399,8 @@ tr:hover td { background: var(--pink-50); }
     max-width: 380px;
     text-align: center;
 }
-.login-card .brand { font-size: 1.8rem; margin-bottom: 4px; }
+.login-card .brand { display: flex; flex-direction: column; align-items: center; margin-bottom: 4px; }
+.login-card .brand img { width: 108px; height: 108px; border-radius: 50%; box-shadow: 0 8px 20px -8px rgba(225,61,120,0.45); margin-bottom: 6px; }
 .login-card p { color: var(--ink-soft); margin-top: 0; margin-bottom: 24px; }
 
 .actions-cell { display: flex; gap: 8px; }

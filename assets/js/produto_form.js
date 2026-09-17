@@ -76,11 +76,12 @@
         const divisor = 1 - (percentualTotal / 100);
 
         const alertaEl = document.getElementById('r-alerta');
+        const alertaTexto = document.getElementById('r-alerta-texto');
         let precoTotal;
         if (divisor <= 0) {
             precoTotal = custoTotal;
-            alertaEl.style.display = 'block';
-            alertaEl.textContent = 'A soma de margem + taxa de cartão + imposto está maior ou igual a 100%. Ajuste os percentuais.';
+            alertaEl.style.display = 'flex';
+            alertaTexto.textContent = 'A soma de margem + taxa de cartão + imposto está maior ou igual a 100%. Ajuste os percentuais.';
         } else {
             precoTotal = custoTotal / divisor;
             alertaEl.style.display = 'none';

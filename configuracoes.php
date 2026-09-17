@@ -46,10 +46,10 @@ require __DIR__ . '/includes/layout_top.php';
 </div>
 
 <?php if ($erro): ?>
-    <div class="alert error">Erro: <?= h($erro) ?></div>
+    <div class="alert error"><?= icon('warning') ?><span>Erro: <?= h($erro) ?></span></div>
 <?php endif; ?>
 <?php if ($sucesso): ?>
-    <div class="alert success"><?= h($sucesso) ?></div>
+    <div class="alert success"><?= icon('check-circle') ?><span><?= h($sucesso) ?></span></div>
 <?php endif; ?>
 
 <form method="post">

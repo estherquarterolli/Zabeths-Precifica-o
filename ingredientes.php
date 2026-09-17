@@ -24,23 +24,24 @@ require __DIR__ . '/includes/layout_top.php';
         <h1>Ingredientes</h1>
         <p>Cadastre os ingredientes com o preço da embalagem para calcular o custo unitário automaticamente. Fica salvo na aba "Ingredientes" da sua planilha.</p>
     </div>
-    <a class="btn" href="ingrediente_form.php">+ Novo ingrediente</a>
+    <a class="btn" href="ingrediente_form.php"><?= icon('plus', 16) ?> Novo ingrediente</a>
 </div>
 
 <?php if ($erro): ?>
-    <div class="alert error">Não foi possível carregar os ingredientes: <?= h($erro) ?></div>
+    <div class="alert error"><?= icon('warning') ?><span>Não foi possível carregar os ingredientes: <?= h($erro) ?></span></div>
 <?php elseif (isset($_GET['excluido'])): ?>
-    <div class="alert success">Ingrediente excluído com sucesso.</div>
+    <div class="alert success"><?= icon('check-circle') ?><span>Ingrediente excluído com sucesso.</span></div>
 <?php endif; ?>
 
 <div class="card">
     <?php if (!$erro && count($ingredientes) === 0): ?>
         <div class="empty-state">
-            <div class="icon">🧺</div>
+            <?= icon('basket', 48) ?>
             <p>Nenhum ingrediente cadastrado ainda.</p>
             <a class="btn" href="ingrediente_form.php">Cadastrar o primeiro ingrediente</a>
         </div>
     <?php elseif (!$erro): ?>
+    <div class="table-scroll">
     <table>
         <thead>
             <tr>
@@ -61,16 +62,17 @@ require __DIR__ . '/includes/layout_top.php';
                 <td><?= num($ing['quantidade_pacote'], 3) ?> <?= h($ing['unidade']) ?></td>
                 <td><?= money($ing['custo_unitario']) ?> / <?= h($ing['unidade']) ?></td>
                 <td class="actions-cell">
-                    <a class="btn small secondary" href="ingrediente_form.php?linha=<?= (int) $ing['linha'] ?>">Editar</a>
+                    <a class="btn small secondary" href="ingrediente_form.php?linha=<?= (int) $ing['linha'] ?>"><?= icon('pencil', 15) ?> Editar</a>
                     <form method="post" action="ingrediente_delete.php" onsubmit="return confirm('Excluir este ingrediente?');" style="display:inline">
                         <input type="hidden" name="linha" value="<?= (int) $ing['linha'] ?>">
-                        <button class="btn small danger" type="submit">Excluir</button>
+                        <button class="btn small danger" type="submit"><?= icon('trash', 15) ?> Excluir</button>
                     </form>
                 </td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
     <?php endif; ?>
 </div>
 

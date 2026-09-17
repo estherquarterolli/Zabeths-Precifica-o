@@ -34,14 +34,14 @@ require __DIR__ . '/includes/layout_top.php';
             <p>Salvo em <?= h($p['data_hora']) ?></p>
         <?php endif; ?>
     </div>
-    <div style="display:flex; gap:8px">
-        <a class="btn secondary" href="produto_form.php">Nova precificação</a>
-        <a class="btn secondary" href="produtos.php">Voltar</a>
+    <div class="topbar-actions">
+        <a class="btn secondary" href="produto_form.php"><?= icon('plus', 16) ?> Nova precificação</a>
+        <a class="btn secondary" href="produtos.php"><?= icon('arrow-left', 16) ?> Voltar</a>
     </div>
 </div>
 
 <?php if ($erro): ?>
-    <div class="alert error"><?= h($erro) ?></div>
+    <div class="alert error"><?= icon('warning') ?><span><?= h($erro) ?></span></div>
 <?php else: ?>
 
 <div class="grid cols-2" style="align-items:start">
