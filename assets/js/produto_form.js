@@ -72,29 +72,35 @@
         const margem = margemInput !== '' ? parseFloat(margemInput.replace(',', '.')) : (config.margem_lucro_padrao || 0);
         const taxaCartao = config.percentual_taxa_cartao || 0;
         const imposto = config.percentual_imposto || 0;
-        const percentualTotal = margem + taxaCartao + imposto;
-        const divisor = 1 - (percentualTotal / 100);
+        const precoComMargem = custoTotal * (1 + (margem / 100));
+        const divisor = 1 - ((taxaCartao + imposto) / 100);
 
         const alertaEl = document.getElementById('r-alerta');
         const alertaTexto = document.getElementById('r-alerta-texto');
         let precoTotal;
         if (divisor <= 0) {
-            precoTotal = custoTotal;
+            precoTotal = precoComMargem;
             alertaEl.style.display = 'flex';
-            alertaTexto.textContent = 'A soma de margem + taxa de cartão + imposto está maior ou igual a 100%. Ajuste os percentuais.';
+            alertaTexto.textContent = 'A soma de taxa de cartão + imposto está maior ou igual a 100%. Ajuste os percentuais em Configurações.';
         } else {
-            precoTotal = custoTotal / divisor;
+            precoTotal = precoComMargem / divisor;
             alertaEl.style.display = 'none';
         }
 
         const rendimento = val('rendimento_qtd') || 1;
         const precoUnitario = precoTotal / rendimento;
 
+        const custoUnitarioSemTaxas = custoTotal / rendimento;
+        const custoTotalComTaxas = divisor > 0 ? (custoTotal / divisor) : custoTotal;
+        const custoUnitarioComTaxas = custoTotalComTaxas / rendimento;
+
         document.getElementById('r-ingredientes').textContent = formatMoney(custoIng);
         document.getElementById('r-mao-obra').textContent = formatMoney(custoMaoObra);
         document.getElementById('r-fixo').textContent = formatMoney(custoFixoRateado);
         document.getElementById('r-embalagem').textContent = formatMoney(custoEmbalagem);
         document.getElementById('r-custo-total').textContent = formatMoney(custoTotal);
+        document.getElementById('r-custo-unit-sem-taxas').textContent = formatMoney(custoUnitarioSemTaxas);
+        document.getElementById('r-custo-unit-com-taxas').textContent = formatMoney(custoUnitarioComTaxas);
         document.getElementById('r-preco-unitario').textContent = formatMoney(precoUnitario);
         document.getElementById('r-preco-lote').textContent = 'Lote: ' + formatMoney(precoTotal);
     }

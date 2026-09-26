@@ -64,15 +64,16 @@ function calcular_precificacao(array $produto, array $itens, array $config): arr
     $taxaCartao = (float) ($config['percentual_taxa_cartao'] ?? 0);
     $imposto = (float) ($config['percentual_imposto'] ?? 0);
 
-    $percentualTotal = $margem + $taxaCartao + $imposto;
-    $divisor = 1 - ($percentualTotal / 100);
+    $precoComMargem = $custoDiretoTotal * (1 + ($margem / 100));
+
+    $divisor = 1 - (($taxaCartao + $imposto) / 100);
 
     $alerta = null;
     if ($divisor <= 0) {
-        $alerta = 'A soma de margem + taxa de cartão + imposto é maior ou igual a 100%. Ajuste os percentuais em Configurações ou no produto.';
-        $precoVendaTotal = $custoDiretoTotal; // fallback: sem markup, evita divisão inválida
+        $alerta = 'A soma de taxa de cartão + imposto é maior ou igual a 100%. Ajuste os percentuais em Configurações.';
+        $precoVendaTotal = $precoComMargem; // fallback: sem repasse de taxas, evita divisão inválida
     } else {
-        $precoVendaTotal = $custoDiretoTotal / $divisor;
+        $precoVendaTotal = $precoComMargem / $divisor;
     }
 
     $rendimento = (float) ($produto['rendimento_qtd'] ?? 1);

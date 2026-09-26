@@ -80,8 +80,8 @@ require __DIR__ . '/includes/layout_top.php';
             <h3>Margem, taxas e impostos</h3>
             <div class="field">
                 <label for="margem_lucro_padrao">Margem de lucro padrão (%)</label>
-                <input type="number" step="0.01" min="0" max="99" id="margem_lucro_padrao" name="margem_lucro_padrao" value="<?= h((string) $config['margem_lucro_padrao']) ?>" required>
-                <div class="hint">Pode ser sobrescrita em cada produto.</div>
+                <input type="number" step="0.01" min="0" max="500" id="margem_lucro_padrao" name="margem_lucro_padrao" value="<?= h((string) $config['margem_lucro_padrao']) ?>" required>
+                <div class="hint">% de lucro sobre o custo do produto (ex: 50% = preço final custa 1,5x o custo). Pode ser sobrescrita em cada produto.</div>
             </div>
             <div class="field">
                 <label for="percentual_taxa_cartao">Taxa de cartão/maquininha (%)</label>

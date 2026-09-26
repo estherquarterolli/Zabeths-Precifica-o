@@ -68,9 +68,18 @@ require __DIR__ . '/includes/layout_top.php';
         <div class="breakdown-line"><span>Custos fixos (rateio)</span><span><?= money($p['custo_fixo_rateado']) ?></span></div>
         <div class="breakdown-line"><span>Embalagem</span><span><?= money($p['custo_embalagem']) ?></span></div>
         <div class="breakdown-line total"><span>Custo total (lote)</span><span><?= money($p['custo_total']) ?></span></div>
+        <?php
+            $rendimentoQtd = (float) ($p['rendimento_qtd'] ?: 1);
+            $divisorTaxas = 1 - (((float) $p['taxa_cartao'] + (float) $p['imposto']) / 100);
+            $custoUnitSemTaxas = $p['custo_total'] / $rendimentoQtd;
+            $custoTotalComTaxas = $divisorTaxas > 0 ? ($p['custo_total'] / $divisorTaxas) : $p['custo_total'];
+            $custoUnitComTaxas = $custoTotalComTaxas / $rendimentoQtd;
+        ?>
+        <div class="breakdown-line"><span>Custo por unidade (sem taxas)</span><span><?= money($custoUnitSemTaxas) ?></span></div>
+        <div class="breakdown-line"><span>Custo por unidade (com taxas)</span><span><?= money($custoUnitComTaxas) ?></span></div>
 
         <div class="price-highlight" style="margin-top:18px">
-            <div class="label">Preço sugerido por unidade</div>
+            <div class="label">Preço sugerido de venda por unidade</div>
             <div class="value"><?= money($p['preco_unitario']) ?></div>
             <div class="sub">Lote completo: <?= money($p['preco_total']) ?></div>
         </div>

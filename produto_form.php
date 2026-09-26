@@ -150,8 +150,8 @@ require __DIR__ . '/includes/layout_top.php';
                         <input type="number" step="0.01" min="0" id="custo_embalagem" name="custo_embalagem" value="<?= h((string) $produto['custo_embalagem']) ?>">
                     </div>
                     <div class="field" style="margin-bottom:0">
-                        <label for="margem_lucro">Margem de lucro (%) — opcional</label>
-                        <input type="number" step="0.01" min="0" max="99" id="margem_lucro" name="margem_lucro" value="<?= h((string) ($produto['margem_lucro'] ?? '')) ?>" placeholder="Padrão: <?= h((string) ($config['margem_lucro_padrao'] ?? 0)) ?>%">
+                        <label for="margem_lucro">Margem de lucro sobre o custo (%) — opcional</label>
+                        <input type="number" step="0.01" min="0" max="500" id="margem_lucro" name="margem_lucro" value="<?= h((string) ($produto['margem_lucro'] ?? '')) ?>" placeholder="Padrão: <?= h((string) ($config['margem_lucro_padrao'] ?? 0)) ?>%">
                     </div>
                 </div>
             </div>
@@ -171,9 +171,11 @@ require __DIR__ . '/includes/layout_top.php';
                 <div class="breakdown-line"><span>Custos fixos (rateio)</span><span id="r-fixo">R$ 0,00</span></div>
                 <div class="breakdown-line"><span>Embalagem</span><span id="r-embalagem">R$ 0,00</span></div>
                 <div class="breakdown-line total"><span>Custo total (lote)</span><span id="r-custo-total">R$ 0,00</span></div>
+                <div class="breakdown-line"><span>Custo por unidade (sem taxas)</span><span id="r-custo-unit-sem-taxas">R$ 0,00</span></div>
+                <div class="breakdown-line"><span>Custo por unidade (com taxas)</span><span id="r-custo-unit-com-taxas">R$ 0,00</span></div>
 
                 <div class="price-highlight" style="margin-top:18px">
-                    <div class="label">Preço sugerido por unidade</div>
+                    <div class="label">Preço sugerido de venda por unidade</div>
                     <div class="value" id="r-preco-unitario">R$ 0,00</div>
                     <div class="sub" id="r-preco-lote">Lote: R$ 0,00</div>
                 </div>
